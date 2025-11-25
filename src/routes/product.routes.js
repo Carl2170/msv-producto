@@ -2,21 +2,12 @@ const express = require("express");
 const router = express.Router();
 const productController = require("../controllers/product.controller");
 
-
-
-
 /**
  * @swagger
  * components:
  *   schemas:
  *     Product:
  *       type: object
- *       required:
- *         - name
- *         - description
- *         - stock
- *         - id_category
- *         - quantity
  *       properties:
  *         id:
  *           type: integer
@@ -33,16 +24,45 @@ const productController = require("../controllers/product.controller");
  *         id_category:
  *           type: integer
  *           description: ID de la categoría
- *         quantity:
- *           type: integer
- *           description: Cantidad mínima de venta
+ *         price:
+ *           type: number
+ *           format: float
+ *           description: Precio del producto
  *       example:
  *         id: 1
  *         name: Clavos
  *         description: Clavos de acero
  *         stock: 50
  *         id_category: 10
- *         quantity: 100
+ *         price: 12.50
+ *     ProductCreate:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: Nombre del producto
+ *         description:
+ *           type: string
+ *           description: Descripción del producto
+ *         stock:
+ *           type: integer
+ *         id_category:
+ *           type: integer
+ *         price:
+ *           type: number
+ *           format: float
+ *       required:
+ *         - name
+ *         - description
+ *         - stock
+ *         - id_category
+ *         - price
+ *       example:
+ *         name: Clavos
+ *         description: Clavos de acero
+ *         stock: 50
+ *         id_category: 10
+ *         price: 12.5
  */
 
 /**
@@ -50,7 +70,7 @@ const productController = require("../controllers/product.controller");
  * /api/products:
  *   get:
  *     summary: Obtener todos los productos
- *     tags: [Product]
+ *     tags: [Products]
  *     responses:
  *       200:
  *         description: Lista de productos
@@ -68,7 +88,7 @@ router.get("/", productController.getAll);
  * /api/products/{id}:
  *   get:
  *     summary: Obtener un producto por ID
- *     tags: [Product]
+ *     tags: [Products]
  *     parameters:
  *       - in: path
  *         name: id
@@ -93,13 +113,13 @@ router.get("/:id", productController.getById);
  * /api/products:
  *   post:
  *     summary: Crear un nuevo producto
- *     tags: [Product]
+ *     tags: [Products]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Product'
+ *             $ref: '#/components/schemas/ProductCreate'
  *     responses:
  *       201:
  *         description: Producto creado
@@ -117,7 +137,7 @@ router.post("/", productController.create);
  * /api/products/{id}:
  *   put:
  *     summary: Actualizar un producto
- *     tags: [Product]
+ *     tags: [Products]
  *     parameters:
  *       - in: path
  *         name: id
@@ -130,7 +150,7 @@ router.post("/", productController.create);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Product'
+ *             $ref: '#/components/schemas/ProductCreate'
  *     responses:
  *       200:
  *         description: Producto actualizado
@@ -148,7 +168,7 @@ router.put("/:id", productController.update);
  * /api/products/{id}:
  *   delete:
  *     summary: Eliminar un producto
- *     tags: [Product]
+ *     tags: [Products]
  *     parameters:
  *       - in: path
  *         name: id
