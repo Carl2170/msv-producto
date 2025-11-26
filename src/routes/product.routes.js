@@ -11,7 +11,7 @@ const productController = require("../controllers/product.controller");
  *       properties:
  *         id:
  *           type: integer
- *           description: ID del producto
+ *           description: ID autogenerado del producto
  *         name:
  *           type: string
  *           description: Nombre del producto
@@ -22,32 +22,33 @@ const productController = require("../controllers/product.controller");
  *           type: integer
  *           description: Stock disponible
  *         id_category:
- *           type: integer
- *           description: ID de la categoría
+ *           type: string
+ *           format: uuid
+ *           description: UUID de la categoría del producto
  *         price:
  *           type: number
  *           format: float
  *           description: Precio del producto
  *       example:
  *         id: 1
- *         name: Clavos
- *         description: Clavos de acero
+ *         name: "Clavos"
+ *         description: "Clavos de acero"
  *         stock: 50
- *         id_category: 10
+ *         id_category: "550e8400-e29b-41d4-a716-446655440000"
  *         price: 12.50
+ *
  *     ProductCreate:
  *       type: object
  *       properties:
  *         name:
  *           type: string
- *           description: Nombre del producto
  *         description:
  *           type: string
- *           description: Descripción del producto
  *         stock:
  *           type: integer
  *         id_category:
- *           type: integer
+ *           type: string
+ *           format: uuid
  *         price:
  *           type: number
  *           format: float
@@ -58,11 +59,11 @@ const productController = require("../controllers/product.controller");
  *         - id_category
  *         - price
  *       example:
- *         name: Clavos
- *         description: Clavos de acero
+ *         name: "Clavos"
+ *         description: "Clavos de acero"
  *         stock: 50
- *         id_category: 10
- *         price: 12.5
+ *         id_category: "550e8400-e29b-41d4-a716-446655440000"
+ *         price: 12.50
  */
 
 /**
